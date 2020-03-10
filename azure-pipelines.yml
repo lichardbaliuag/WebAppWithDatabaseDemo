@@ -150,30 +150,6 @@ stages:
         PathtoPublish: AzureResourceGroupDeployment
         ArtifactName: arm
 
-- stage: Dev_Stage
-  displayName: Dev Stage
-  dependsOn: Build_Stage
-  jobs:
-  - job: Dev
-    displayName: Deploy to Dev Job
-    pool:
-      name: Hosted Windows 2019 with VS2019 
-      vmImage: 'windows-2019'
-    variables:
-      Parameters.ConnectedServiceName: 'Microsoft Azure Sponsorship (5a56fb34-f1c5-4669-9412-4592bb81a2cf)' # couldn't be referenced
-      ResourceGroupName: '$(Prefix)-$(Release.EnvironmentName)-$(UniqueId)-RG'
-      Database.Admin: 'houssem'
-      Database.Password: '@Aa123456'
-      Database.Name: 'EmployeesDB'
-      WebAppName: '$(Prefix)-$(Release.EnvironmentName)-$(UniqueId)'
-      WebAppNameUrl: 'https://$(WebAppName).azurewebsites.net/'
-      SqlServerName: '$(Prefix)-sql-$(Release.EnvironmentName)-$(UniqueId)'
-      Prefix: 'tunis'
-      Release.EnvironmentName: 'dev'
-      UniqueId: '1280' #'$(Build.BuildId)'
-
-    steps:
-    - checkout: none
     - task: DownloadBuildArtifacts@0
       displayName: Download Build Artifacts
       inputs:
@@ -230,8 +206,6 @@ stages:
         TakeAppOfflineFlag: true
         JSONFiles: '**/appsettings.json'
         packageForLinux: '$(System.DefaultWorkingDirectory)/drop/WebApp.zip' #'$(System.ArtifactsDirectory)/**/drop/WebApp.zip'
-
-
 
     - task: DownloadBuildArtifacts@0    
       displayName: Download DacPac
