@@ -153,7 +153,7 @@ stages:
       displayName: Validate ARM template
       enabled: 'false'
       inputs:
-        azureSubscription: 'Microsoft Azure Sponsorship (5a56fb34-f1c5-4669-9412-4592bb81a2cf)'
+        azureSubscription: 'Microsoft Azure Sponsorship $(AZSubscription)'
         action: 'Create Or Update Resource Group'
         resourceGroupName: '$(ResourceGroupName)'
         location: 'West Europe'
@@ -167,7 +167,7 @@ stages:
       displayName: Create Or Update Resource Group
       enabled: 'false'
       inputs:
-        azureSubscription: 'Microsoft Azure Sponsorship (5a56fb34-f1c5-4669-9412-4592bb81a2cf)'
+        azureSubscription: 'Microsoft Azure Sponsorship $(AZSubscription)'
         action: 'Create Or Update Resource Group'
         resourceGroupName: '$(ResourceGroupName)'
         location: 'West Europe'
@@ -194,7 +194,7 @@ stages:
       displayName: Deploy Web App to Azure App Service
       enabled: 'true'
       inputs:
-        azureSubscription: 'Microsoft Azure Sponsorship (5a56fb34-f1c5-4669-9412-4592bb81a2cf)'
+        azureSubscription: 'Microsoft Azure Sponsorship $(AZSubscription)'
         appType: 'webApp'
         WebAppName: '$(WebAppName)'
         TakeAppOfflineFlag: true
@@ -213,7 +213,7 @@ stages:
     - task: SqlAzureDacpacDeployment@1
       displayName: Azure SQL Publish DacPac to SQL Azure
       inputs:
-        azureSubscription: 'Microsoft Azure Sponsorship (5a56fb34-f1c5-4669-9412-4592bb81a2cf)'
+        azureSubscription: 'Microsoft Azure Sponsorship $(AZSubscription)'
         ServerName: '$(SqlServerName).database.windows.net,1433'
         DatabaseName: '$(Database.Name)'
         SqlUsername: '$(Database.Admin)'
