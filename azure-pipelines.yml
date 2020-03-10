@@ -81,12 +81,6 @@ stages:
         arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
         zipAfterPublish: True
 
-    - task: SonarCloudAnalyze@1
-      displayName: Run Code Analysis
-
-    - task: SonarCloudPublish@1
-      displayName: Publish Quality Gate Result
-
     - task: PublishBuildArtifacts@1
       displayName: Publish Artifact (WebApp.zip)
       inputs:
@@ -185,37 +179,6 @@ stages:
       inputs:
         artifactName: terraform
         downloadPath: $(System.DefaultWorkingDirectory)
-
-    - task: Terraform@2
-      inputs:
-        TemplatePath: '$(System.DefaultWorkingDirectory)/terraform/'
-        Arguments: 'init'
-        InstallTerraform: true
-        UseAzureSub: true
-        ConnectedServiceNameSelector: 'ConnectedServiceNameARM'
-        ConnectedServiceNameARM: 'Microsoft Azure Sponsorship (5a56fb34-f1c5-4669-9412-4592bb81a2cf)'
-        ManageState: false
-
-    - task: Terraform@2
-      inputs:
-        TemplatePath: '$(System.DefaultWorkingDirectory)/terraform/'
-        Arguments: 'plan'
-        InstallTerraform: true
-        UseAzureSub: true
-        ConnectedServiceNameSelector: 'ConnectedServiceNameARM'
-        ConnectedServiceNameARM: 'Microsoft Azure Sponsorship (5a56fb34-f1c5-4669-9412-4592bb81a2cf)'
-        ManageState: false
-
-    - task: Terraform@2
-      inputs:
-        TemplatePath: '$(System.DefaultWorkingDirectory)/terraform/'
-        Arguments: 'apply'
-        InstallTerraform: true
-        UseAzureSub: true
-        ConnectedServiceNameSelector: 'ConnectedServiceNameARM'
-        ConnectedServiceNameARM: 'Microsoft Azure Sponsorship (5a56fb34-f1c5-4669-9412-4592bb81a2cf)'
-        ManageState: false
-
     - task: AzureResourceGroupDeployment@2
       displayName: Validate ARM template
       enabled: 'false'
