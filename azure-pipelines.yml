@@ -242,7 +242,6 @@ stages:
         runInParallel: false
         codeCoverageEnabled: false
 
-
 - stage: Test_Stage
   displayName: Test Stage
   jobs:
